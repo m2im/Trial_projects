@@ -43,7 +43,7 @@ NUM_TEST_IMAGES = 0.15
 
 # define the batch size and other network parameters
 BATCH_SIZE = 16
-NUM_DEVICES = 1
+NUM_DEVICES = 4
 DATA_SHAPE = (3, 227, 227)
 MODEL_PREFIX = "SqueezeNet"
 

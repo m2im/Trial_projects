@@ -1,4 +1,5 @@
 #!/bin/bash
+# CHANGES: volume type and training code
 # Get instance ID, Instance AZ, Volume ID and Volume AZ 
 INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 INSTANCE_AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
@@ -40,15 +41,15 @@ if [ $VOLUME_ID ]; then
 		# Mount volume and change ownership, since this script is run as root
 		mkdir /dltraining
 		mount /dev/xvdf /dltraining
-		chown -R ec2-user: /dltraining/
-		cd /home/ec2-user/
+		chown -R ubuntu: /dltraining/
+		cd /home/ubuntu/
 
 		# Get training code
-		git clone https://github.com/awslabs/ec2-spot-labs.git
-		chown -R ec2-user: ec2-spot-labs
-		cd ec2-spot-labs/ec2-spot-deep-learning-training/
+		git clone https://github.com/m2im/Trial_projects.git
+		chown -R ubuntu: Trial_projects
+		cd Trial_projects/car_mxsqueezenet_spot/
 
-		# Initiate training using the tensorflow_36 conda environment
+		# Initiate training using the mxnet virtualenvs environment
 		sudo -H -u ubuntu bash -c "source /home/ubuntu/.virtualenvs/mxnet/bin/activate; python train_squeezenet_spot.py"
 fi
 

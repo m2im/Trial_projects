@@ -1,13 +1,14 @@
 {
   "TargetCapacity": 1,
+  "AllocationStrategy": "lowestPrice",
   "IamFleetRole": "arn:aws:iam::610181761826:role/DL-Training-Spot-Fleet-Role",
   "LaunchSpecifications": [
       {
           "ImageId": "ami-089c8796ad90c7807",
-          "KeyName": "<KEYPAIR_NAME>",
+          "KeyName": "dl4cv-key-pair-oregon",
           "SecurityGroups": [
               {
-                  "GroupId": "<SECURITY_GROUP_ID>"
+                  "GroupId": "sg-08eccbef13f9ae43d"
               }
           ],
           "InstanceType": "c5.xlarge",
