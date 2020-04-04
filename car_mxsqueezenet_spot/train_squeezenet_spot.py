@@ -89,7 +89,7 @@ else:
 
 # compile the model
 model = mx.model.FeedForward(
-	ctx=[mx.cpu()],  # ctx=[mx.gpu(0), mx.gpu(1), mx.gpu(2)]
+	ctx=[mx.cpu(0)],  # ctx=[mx.gpu(0), mx.gpu(1), mx.gpu(2)]
 	symbol=model,
 	initializer=mx.initializer.Xavier(),
 	arg_params=argParams,

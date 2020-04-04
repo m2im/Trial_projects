@@ -42,16 +42,16 @@ NUM_VAL_IMAGES = 0.15
 NUM_TEST_IMAGES = 0.15
 
 # define the batch size and other network parameters
-BATCH_SIZE = 16
-NUM_DEVICES = 4
+BATCH_SIZE = 32
+NUM_DEVICES = 1
 DATA_SHAPE = (3, 227, 227)
 MODEL_PREFIX = "SqueezeNet"
 
 # define training and optimizer parameters
 START_EPOCH = 0
-NUM_EPOCH = 60
-LR = 1e-5
-WD = 0.0002   # Weight Decay
+NUM_EPOCH = 40
+LR = 1e-4
+WD = 0.0005   # Weight Decay
 
 # define callback and metrics parameters
 TOP_K = 5
