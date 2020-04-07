@@ -47,7 +47,7 @@ DATA_SHAPE = (3, 227, 227)
 MODEL_PREFIX = "SqueezeNet"
 
 # define training and optimizer parameters
-START_EPOCH = 12
+START_EPOCH = 0
 NUM_EPOCH = 60
 LR = 1e-5
 WD = 0.0002   # Weight Decay

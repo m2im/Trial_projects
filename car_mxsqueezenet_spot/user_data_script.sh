@@ -1,5 +1,11 @@
 #!/bin/bash
 # CHANGES: volume type and training code
+
+# Install AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
 # Get instance ID, Instance AZ, Volume ID and Volume AZ 
 INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 INSTANCE_AZ=$(curl -s http://169.254.169.254/latest/meta-data/placement/availability-zone)
@@ -39,9 +45,9 @@ if [ $VOLUME_ID ]; then
 		sleep 10
 
 		# Mount volume and change ownership, since this script is run as root
-		mkdir /dltraining
-		mount /dev/xvdf /dltraining
-		chown -R ubuntu: /dltraining/
+		mkdir /home/ubuntu/dltraining
+		mount /dev/nvme1n1p1 /home/ubuntu/dltraining
+		chown -R ubuntu: /home/ubuntu/dltraining/
 		cd /home/ubuntu/
 
 		# Get training code
