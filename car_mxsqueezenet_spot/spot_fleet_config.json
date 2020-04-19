@@ -4,7 +4,7 @@
   "IamFleetRole": "arn:aws:iam::610181761826:role/DL-Training-Spot-Fleet-Role",
   "LaunchSpecifications": [
       {
-          "ImageId": "ami-089c8796ad90c7807",
+          "ImageId": "ami-00879c7d1f6527aa9",
           "KeyName": "dl4cv-key-pair-oregon",
           "SecurityGroups": [
               {

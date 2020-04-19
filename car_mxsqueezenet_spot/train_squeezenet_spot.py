@@ -2,7 +2,7 @@
 # python train_squeezenet_spot.py
 
 # import the necessary packages
-from config import config_local as config
+from config import config_spot as config
 from pyimagesearch.nn.mxconv import MxSqueezeNet
 from imutils import paths
 import mxnet as mx
