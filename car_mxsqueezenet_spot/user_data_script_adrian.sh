@@ -2,9 +2,9 @@
 # CHANGES: volume type and training code
 
 # Install AWS CLI
-# curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-# unzip awscliv2.zip
-# sudo ./aws/install
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
 
 # Get instance ID, Instance AZ, Volume ID and Volume AZ 
 INSTANCE_ID=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
@@ -57,8 +57,10 @@ if [ $VOLUME_ID ]; then
 
 		# Initiate training using the mxnet virtualenvs environment
 		# sudo -H -u ubuntu bash -c "source /home/ubuntu/.virtualenvs/mxnet/bin/activate; python train_squeezenet_spot.py"
+		#sudo -H -u ubuntu bash -c "source `/usr/local/bin/virtualenvwrapper.sh`"
+                sudo -H -u ubuntu /home/ubuntu/.virtualenvs/mxnet/bin/python train_squeezenet_spot.py
 fi
 
 # After training, clean up by cancelling spot requests and terminating itself
-# SPOT_FLEET_REQUEST_ID=$(aws ec2 describe-spot-instance-requests --region $AWS_REGION --filter "Name=instance-id,Values='$INSTANCE_ID'" --query "SpotInstanceRequests[].Tags[?# Key=='aws:ec2spot:fleet-request-id'].Value[]" --output text)
-# aws ec2 cancel-spot-fleet-requests --region $AWS_REGION --spot-fleet-request-ids $SPOT_FLEET_REQUEST_ID --terminate-instances
+SPOT_FLEET_REQUEST_ID=$(aws ec2 describe-spot-instance-requests --region $AWS_REGION --filter "Name=instance-id,Values='$INSTANCE_ID'" --query "SpotInstanceRequests[].Tags[?Key=='aws:ec2spot:fleet-request-id'].Value[]" --output text)
+aws ec2 cancel-spot-fleet-requests --region $AWS_REGION --spot-fleet-request-ids $SPOT_FLEET_REQUEST_ID --terminate-instances

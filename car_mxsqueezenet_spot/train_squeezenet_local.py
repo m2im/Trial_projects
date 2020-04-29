@@ -15,15 +15,23 @@ import os
 list_of_checkpoint_files = glob.glob(os.path.join(config.CHECKPOINT_PATH, '*.params'))      # /home/milton/Documents/Projects/Trial_results/car_mxsqueezenet_local_output/checkpoints/SqueezeNet-0005.params
 checkpoint_epoch_number = [file.split("/")[-1] for file in list_of_checkpoint_files] # ['SqueezeNet-0005.params', 'SqueezeNet-0002.params', ..]
 checkpoint_epoch_number = [file.split(".")[0] for file in checkpoint_epoch_number]   # ['SqueezeNet-0005', 'SqueezeNet-0002', ..]
-num_of_checkpoint_files = max([int(file.split("-")[-1]) for file in checkpoint_epoch_number])  # [0005, 0004]  [5, 4, 3, 2]  [5]
 
-if config.START_EPOCH < num_of_checkpoint_files:
+if not list_of_checkpoint_files:
+	num_of_checkpoint_files = 0
+else:
+	num_of_checkpoint_files = max([int(file.split("-")[-1]) for file in checkpoint_epoch_number])  # [0005, 0004]  [5, 4, 3, 2]  [5]
+
+if config.START_EPOCH == 0:
+	START_EPOCH = 0
+elif config.START_EPOCH < num_of_checkpoint_files:
 	START_EPOCH = config.START_EPOCH
 else:
 	START_EPOCH = num_of_checkpoint_files
 
+print("START_EPOCH = {}".format(START_EPOCH))
+
 # set the logging level and output file
-log_file = "training_{}.log".format(START_EPOCH)
+log_file = "training{}.log".format(START_EPOCH)
 logging.basicConfig(level=logging.DEBUG,
 	filename=os.path.sep.join([config.LOG_PATH, log_file]),
 	filemode="w")
