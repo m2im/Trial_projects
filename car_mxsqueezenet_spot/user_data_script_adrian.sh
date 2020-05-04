@@ -46,7 +46,7 @@ if [ $VOLUME_ID ]; then
 
 		# Mount volume and change ownership, since this script is run as root
 		mkdir /home/ubuntu/dltraining
-		mount /dev/nvme1n1p1 /home/ubuntu/dltraining
+		mount /dev/xvdf1 /home/ubuntu/dltraining
 		chown -R ubuntu: /home/ubuntu/dltraining/
 		cd /home/ubuntu/
 
@@ -56,7 +56,11 @@ if [ $VOLUME_ID ]; then
 		cd Trial_projects/car_mxsqueezenet_spot/
 
 		# Initiate training using the mxnet virtualenvs environment
-		# sudo -H -u ubuntu bash -c "source /home/ubuntu/.virtualenvs/mxnet/bin/activate; python train_squeezenet_spot.py"
+		#sudo -H -u ubuntu bash -c "source /home/ubuntu/anaconda3/bin/activate mxnet_p36; python train_squeezenet_spot.py"
+                #sudo -H -u ubuntu bash -c "source `which virtualenvwrapper.sh`"
+                #workon mxnet
+                #python train_squeezenet_spot.py
+                #deactivate
 		#sudo -H -u ubuntu bash -c "source `/usr/local/bin/virtualenvwrapper.sh`"
                 sudo -H -u ubuntu /home/ubuntu/.virtualenvs/mxnet/bin/python train_squeezenet_spot.py
 fi
